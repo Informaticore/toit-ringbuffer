@@ -1,7 +1,12 @@
 # ringbuffer
 A RingBuffer implementation as a data structure that stores a fixed number of elements and overwrites the oldest elements once the maximum size is reached.
 
-Usage:
+## Install
+```
+jag pkg install ringbuffer
+```
+
+## Usage:
 ```
 import ringbuffer show *
 
