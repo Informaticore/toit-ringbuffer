@@ -1,0 +1,2 @@
+name: ringbuffer
+description: A RingBuffer implementation as a data structure that stores a fixed number of elements and overwrites the oldest elements once the maximum size is reached.
