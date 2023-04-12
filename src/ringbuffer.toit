@@ -15,24 +15,39 @@ class RingBuffer:
   append value/float:
     buffer[head] = value
     head = (head + 1) % size_
-    count = min (count + 1) size_
+    count = (min (count + 1) size_)
 
+  is_empty -> bool:
+    return count == 0
+
+  reduce [block]:
+    if is_empty: throw "Not enough elements"
+    result := null
+    is_first := true
+    for i := 0; i < count; i++:
+      if is_first: result = buffer[i]; is_first = false
+      else: result = block.call result buffer[i]
+    return result
+
+  minimum -> float:
+    return reduce : | a b | min a b
+
+  maximum -> float:
+    return reduce : | a b | max a b
+
+  //@davidg238: what is this method for?
   min value1 value2:
     if value1 < value2:
       return value1
     return value2
 
   average -> float:
-    average := 0.0
-    for i := 0; i <= count - 1; i++:
-      average += buffer[i]
-    return average/count
+    sum := reduce : | a b | a + b
+    return sum / count
 
   std_deviation -> float:
-    variance := 0.0
-    for i := 0; i < count; i++:
-      variance += math.pow (buffer[i] - average) 2
-    
+    avg := average
+    variance := reduce : | a b | a += math.pow (b - avg) 2
     return math.sqrt variance / size_
 
   get_last -> float:
