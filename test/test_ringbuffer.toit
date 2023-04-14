@@ -50,7 +50,7 @@ class TestRingbuffer implements TestCase:
     assertEquals 2.3 ringbuffer.average 
     assertEquals 2.3 ringbuffer.minimum 
     assertEquals 2.3 ringbuffer.maximum 
-    // assertEquals 0.0 ringbuffer.std_deviation   //@davidg238: should entries be required?
+    assertEquals 0.0 ringbuffer.std_deviation
 
 
   test_ringbuffer_average:
