@@ -94,7 +94,7 @@ class TestRingbuffer implements TestCase:
   test_ringbuffer_limit:
     exception := catch:
       ringbuffer := RingBuffer -1
-    assertException "RingBuffer size must be larger then 0" 
+    assertException exception
 
   test_ringbuffer_get_last:
     ringbuffer := RingBuffer 5
