@@ -4,7 +4,10 @@ import ringbuffer show *
 class TestRingbuffer implements TestCase:
 
   run:
-    // test_ringbuffer_empty  //@davidg238: not calling assertException correctly?
+    test_ringbuffer_average_on_empty_exception
+    test_ringbuffer_minimum_on_empty_exception
+    test_ringbuffer_maximum_on_empty_exception
+    test_ringbuffer_deviation_on_empty_exception
     test_ringbuffer_one_element
     test_ringbuffer_average
     test_ringbuffer_minimum
@@ -17,12 +20,29 @@ class TestRingbuffer implements TestCase:
   name -> string:
     return "TestRingbuffer"
 
-  test_ringbuffer_empty:
+  test_ringbuffer_average_on_empty_exception:
     ringbuffer := RingBuffer 3
-    assertException ringbuffer.average 
-    assertException ringbuffer.minimum 
-    assertException ringbuffer.maximum 
-    assertException ringbuffer.std_deviation 
+    exception := catch:
+      ringbuffer.average //average
+    assertException exception
+
+  test_ringbuffer_minimum_on_empty_exception:
+    ringbuffer := RingBuffer 3
+    exception := catch:
+      ringbuffer.minimum //minimum
+    assertException exception
+  
+  test_ringbuffer_maximum_on_empty_exception:
+    ringbuffer := RingBuffer 3
+    exception := catch:
+      ringbuffer.maximum //maximum
+    assertException exception
+
+  test_ringbuffer_deviation_on_empty_exception:
+    ringbuffer := RingBuffer 3
+    exception := catch:
+      ringbuffer.std_deviation //std_deviation
+    assertException exception
 
   test_ringbuffer_one_element:
     ringbuffer := RingBuffer 3
