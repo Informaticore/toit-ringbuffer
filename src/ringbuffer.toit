@@ -15,7 +15,7 @@ class RingBuffer:
   append value/float:
     buffer[head] = value
     head = (head + 1) % size_
-    count = (min (count + 1) size_)
+    count = min (count + 1) size_
 
   is_empty -> bool:
     return count == 0
