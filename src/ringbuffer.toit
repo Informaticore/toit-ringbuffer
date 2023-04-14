@@ -35,17 +35,14 @@ class RingBuffer:
   maximum -> float:
     return reduce : | a b | max a b
 
-  //@davidg238: what is this method for?
-  min value1 value2:
-    if value1 < value2:
-      return value1
-    return value2
-
   average -> float:
     sum := reduce : | a b | a + b
     return sum / count
 
   std_deviation -> float:
+    if is_empty: throw "Not enough elements"
+    if count < 2:
+      return 0.0 //if there is only one entry return 0.0
     avg := average
     variance := reduce : | a b | a += math.pow (b - avg) 2
     return math.sqrt variance / size_
