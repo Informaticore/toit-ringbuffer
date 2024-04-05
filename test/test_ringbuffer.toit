@@ -15,6 +15,7 @@ class TestRingbuffer implements TestCase:
     test_ringbuffer_max
     test_ringbuffer_limit
     test_ringbuffer_get_last
+    test_ringbuffer_get_last_when_full
     test_ringbuffer_std_deviation
 
   name -> string:
@@ -104,6 +105,13 @@ class TestRingbuffer implements TestCase:
     ringbuffer.append 2.0
     last = ringbuffer.get_last
     assertEquals 2.0 last
+
+  test_ringbuffer_get_last_when_full:
+    ringbuffer := RingBuffer 5
+    5.repeat:
+      ringbuffer.append (it + 1).to-float
+    last := ringbuffer.get_last
+    assertEquals 5.0 last
 
   test_ringbuffer_std_deviation:
     ringbuffer := RingBuffer 5

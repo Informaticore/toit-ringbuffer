@@ -48,4 +48,4 @@ class RingBuffer:
     return math.sqrt variance / size_
 
   get_last -> float:
-    return buffer[head - 1]
+    return buffer[(head - 1 + size_) % size_]
